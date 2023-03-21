@@ -8,13 +8,14 @@ export default class TabwebhooksController {
   }
 
   public async store({request}: HttpContextContract) {
-    const body = request.only(['id_filial', 'id_evento', 'status', 'tipo_evento'])
+//    const body = request.only(['instance', 'event', 'tipo_evento'])
+    const body = request.all()   
     const tabwebhook = await Tabwebhook.create(
       {
-        id_filial : body.id_filial,
-        id_evento : body.id_evento,
-        status : body.status,
-        tipo_evento : body.tipo_evento
+        id_filial : body.instance,
+        id_evento : body.instance,
+        status : 0,
+        tipo_evento : body.event
       }
     )
     return tabwebhook
